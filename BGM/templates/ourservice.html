@@ -1,0 +1,203 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <!-- basic -->
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <!-- mobile metas -->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+      <!-- site metas -->
+      <title>BG MAINTENANCE SOLUTIONS LTD</title>
+      <meta name="keywords" content="">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <!-- bootstrap css -->
+      <link rel="stylesheet" href="{% static 'website/css/bootstrap.min.css' %}">
+      <!-- style css -->
+      <link rel="stylesheet" href="{% static 'website/css/style.css' %}">
+      <!-- Responsive-->
+      <link rel="stylesheet" href="{% static 'website/css/responsive.css' %}">
+      <!-- fevicon -->
+      <link rel="icon" href="{% static 'website/images/logo.jpg' %}" type="image/gif" />
+      <!-- Scrollbar Custom CSS -->
+      <link rel="stylesheet" href="{% static 'website/' %}css/jquery.mCustomScrollbar.min.css">
+      <!-- Tweaks for older IEs-->
+      <link rel="stylesheet" href="{% static 'website/https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css' %}">
+      <link rel="stylesheet" href="{% static 'website/https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css' %}" media="screen">
+      <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css">
+      <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+   </head>
+   <!-- body -->
+   <body class="main-layout">
+      <!-- loader  -->
+      <div class="loader_bg">
+         <div class="loader"><img src="{% static 'website/images/loading.gif' %}" alt="#" /></div>
+      </div>
+      <!-- end loader -->
+      <!-- header -->
+      <header>
+         <!-- header inner -->
+         <div class="header">
+            <div class="container">
+                 <div class="head2">
+               <img src="{% static 'website/images/logo.jpg' %}" alt="#" />
+               <h1><em>BG MAINTENANCE SOLUTIONS LTD</em></h1>
+               <p><em>Spare Parts & Service</em>
+               <p><em>BG MAINTENANCE for best and original spare parts and solutions</em></p>
+               </p>
+            </div>
+               <br><br>
+               <hr>
+               <div class="row">
+
+                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
+                     <div class="full">
+                        <div class="center-desk">
+                          
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
+                     <nav class="navigation navbar navbar-expand-md navbar-dark ">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarsExample04">
+                           <ul class="navbar-nav mr-auto">
+                              <li class="nav-item">
+                                 <a class="nav-link" href="{% url 'index' %}"> Home  </a>
+                              </li>
+                              <li class="nav-item">
+                                 <a class="nav-link" href="{% url 'PostList' %}">Our Services</a>
+                              </li>
+                              <li class="nav-item">
+                                 <a class="nav-link" href="{% url 'about'%}">About</a>
+                              </li>
+                              <li class="nav-item">
+                                 <a class="nav-link" href="{% url 'contact' %}">Contact us</a>
+                              </li>
+                              <li class="nav-item">
+                                 <a class="nav-link" href="{% url 'Stuff' %}">Stuff</a>
+                              </li>
+                           </ul>
+                           <div class="sign_btn"><a href="#">Sign in</a></div>
+                        </div>
+                     </nav>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </header>
+ 
+      <div class="container">
+         <div class="row">
+            <div class="col-3 md">
+               <div class="service">
+               <h3>We Sell the following Spare Parts</h3>
+            </div>
+               <div class="card">
+                  <img src="{% static 'website/images/oil2.jpg' %}" alt="#"/>
+                  <p>Original Oils</p>
+               </div>
+               <div class="card">
+                  <img src="{% static 'website/images/spares.jpg'%}" alt="#"/>
+                  <p>Original Oils</p>
+               </div>
+               <div class="card">
+                  <img src="{% static 'website/images/spare2.jpg'%}" alt="#"/>
+                  <p>Original Oils</p>
+               </div>
+            </div>
+            <div class="col-6 md">
+               <div class="service">
+               <h3>We Provide the following Car Maintanence</h3>
+            </div>
+               <div class="card">
+                <ul> 
+                  {% for post in object_list %}
+                  <div class="post">
+                 {{post.title}} -  <em>Posted at</em> {{post.date_created}}<br>
+            
+                  {{post.body}}
+                 </div>
+                    <img src="{{post.images.url}}">
+                    <br><br>
+                    <hr>
+                    <h3>We love to here from you Please leave your comments here!!</h3><br>
+                    <span class=" btn btn-info btn-lg glyphicon glyphicon-comment "></span>
+                     {% if not post.comments.all %}
+                  No comments yet!! <a href="{% url 'Addcomments' post.pk %}">Add one</a>
+                  {% else %}
+                  <a href="">Add comment</a>
+                  {% for comment in post.comments.all %}
+                 <h3>Commented by:{{ comment.name }} - at : {{comment.date_commented}}</h3>
+                  {{ comment.body }}
+                  {% endfor %}
+                  {% endif %}
+               
+                  <hr>
+                  {% endfor %}
+
+                </ul>
+               </div>
+            
+            </div>
+            <div class="col-3 md">
+               <div class="comm">
+               <h3>We Sell the following Spare Parts</h3>
+            </div>
+               <div class="card">
+                    <img src="{% static 'website/images/spares.jpg'%}" alt="#"/>
+                  <p>Original Oils</p>
+                  <img src="{{post.author.profile.profile_pic.url}}">
+                  {{ user.profile.bio }}
+               </div>
+            </div>
+         </div>
+      </div>
+       <!--  footer -->
+      <footer>
+         <div class="footer">
+            <div class="container">
+               <div class="row">
+                  <div class="col-md-12">
+                     <div class="cont_call">
+                        <h3>For further information</h3>
+                        <h3> <strong class="multi color_chang"> Call Now</strong><br>
+                           +255 753 369 921
+                        </h3>
+                     </div>
+                     <div class="cont">
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="copyright">
+               <div class="container">
+                  <div class="row">
+                     <div class="col-md-12">
+                        <p>© 2021 All Rights Reserved. Design by <a href="https://html.design/"> Sam The Coder</a></p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </footer>
+      <!-- end footer -->
+      <!-- Javascript files-->
+      <script src="{% static 'website/js/jquery.min.js' %}"></script>
+      <script src="{% static 'website/js/popper.min.js' %}"></script>
+      <script src="{% static 'website/js/bootstrap.bundle.min.js' %}"></script>
+      <script src="{% static 'website/js/jquery-3.0.0.min.js' %}"></script>
+      <script src="{% static 'website/js/plugin.js' %}"></script>
+      <!-- sidebar -->
+      <script src="{% static 'website/js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+      <script src="{% static 'website/js/custom.js' %}"></script>
+      <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+   </body>
+</html>
